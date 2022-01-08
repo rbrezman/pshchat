@@ -2,6 +2,11 @@
   text-align: center;
 }
 
+* 
+{
+  font-family: montserrat;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -61,6 +66,76 @@
 
 .chat
 {
-  position: fixed;
-  margin-left: 300px;
+  position: absolute;
+  margin-left: 330px;
+  max-height: 50vh;
+  min-height: 50vh;
+  overflow: scroll;
+  border: 1px solid black;
+}
+
+.chatSection
+{
+  height: 100vh;
+}
+
+.messageBox
+{
+display: flex;
+margin-left: 35%;
+}
+
+.login
+{
+  margin-left: 330px;
+}
+
+.sendButton
+{
+  background-color: #E6E6E6;
+  margin-left: 5px;
+  margin-bottom: 20px;
+}
+
+.sidemenu
+{
+  display: flex;
+  flex-direction: column;
+  flex: 0.35;
+  width: 35%;
+  height: 100%;
+}
+
+.sidemenu_header
+{
+  display: flex;
+  background-color: darkred;
+  color: white;
+  justify-content: center;
+}
+
+.sidemenu_user
+{
+  background-color: black;
+  color: white;
+  display: flex;
+  padding: 20px;
+  align-items: center;
+  justify-content: center;
+}
+
+.sidemenu_chats
+{
+  color: white;
+  background-color: black;
+}
+
+.chatName
+{
+
+}
+
+.chatMessage
+{
+
 }

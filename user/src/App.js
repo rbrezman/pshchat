@@ -1,17 +1,48 @@
 import React, { useState } from 'react';
 import './App.css';
-import socket from './components/socket';
-import Chat from './components/chat';
-import SideMenu from './components/sideMenu';
+import Socket from './components/Socket';
+import Chat from './components/Chat';
+import SideMenu from './components/SideMenu';
+import Contacts from './components/contacts/Contacts';
+
+
 
 function App() {
+
+  const [nombre, setNombre] = useState("");
+  const [registrado, setRegistrado] = useState(false);
   
+const registrar = (e) => 
+{
+  e.preventDefault();
+  if(nombre !== "")
+  {
+    setRegistrado(true);
+  }
+}
+
   return (
+    
+    <div className="App" >
+       
+      {
+        !registrado &&
+        <form className="login" onSubmit={registrar}>
+          <header>¡Bienvenido al chat de PSH!</header>
+          <div>
+          <label htmlFor="">Ingrese su nombre</label>
+          </div>
+          <input value={nombre} onChange={e => setNombre(e.target.value)}></input>
+          <button>Chatear</button>
+        </form>
+       
+      }
 
-    <div className="App" style={{height: '100vh'}}>
-      <SideMenu />
-      <Chat />
-
+      {
+          registrado && <Chat nombre = {nombre}/> 
+        
+      }
+ 
     </div>
 );
 }

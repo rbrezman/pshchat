@@ -14,11 +14,9 @@ io.on('connection', socket =>
             console.log('Usuario conectado');
         });
     
-    socket.on('mensaje', (mensaje) => 
-    { 
-        io.emit("mensajes", {mensaje});
-    })
-    socket.on('disconnect', {server: "Servidor", mensaje: "Ha abandonado la sala"});
-});
+        socket.on('mensaje', (nombre, mensaje) => {
+            io.emit("mensajes", { nombre, mensaje });
+          });
+          });
 
 server.listen(3000, () => console.log("Servidor inicializado"));
