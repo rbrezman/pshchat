@@ -24,13 +24,7 @@ useEffect(() => {
     };
 }, [mensajes]);
 
-    
-const divRef = useRef(null);
-useEffect((e) => 
-{
-  e.preventDefault();
-  divRef.current.scrollIntoView({behaviour: 'smooth'});
-})
+
 
  
 const submit = (e) => 
@@ -51,7 +45,6 @@ return (
             <div>{e.nombre}: {e.mensaje}</div>
           </div>
         ))}
-        <div ref={divRef}></div>
       </div>
       <form onSubmit={submit} className="messageBox" >
         <textarea
