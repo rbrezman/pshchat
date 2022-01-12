@@ -1,64 +1,53 @@
 import React, {useState, useEffect, useRef} from 'react';
-import Socket from './Socket';
-import socket from './Socket';
 import '../App.css'
+import SideMenu from './SideMenu';
+import Conversation from '../Conversation';
+import io from 'socket.io-client';
+import { getLocalStorage, setLocalStorage } from '../Storage';
+
+const socket = io("//localhost:3001");
 
 const Chat = ({nombre}) => 
 {
 const [mensaje, setMensaje] = useState("");
-const [mensajes, setMensajes] = useState([]);
+const [room, setRoom] = useState(null);
+const [data, setData] = useState([]);
+const [roomSelected, setRoomSelected] = useState(false);
+
+
 
 useEffect(() => {
-
+    console.log("Hola")
     socket.emit('conectado', nombre);
-
+    console.log("Chau")
 }, [nombre]);
 
-useEffect(() => {
-
-    socket.on('mensajes', mensaje => 
-    {
-        setMensajes([...mensajes, mensaje]);
-    })
-    return () => {socket.off()
-    };
-}, [mensajes]);
 
 
-
- 
-const submit = (e) => 
+const joinRoom = (data) => 
 {
-    e.preventDefault();
-    socket.emit("mensaje", nombre, mensaje);
-    console.log(mensaje);
-
+  setRoom(data);
+  socket.emit("join_room", data);
+  console.log(data);
+  const Arr = getLocalStorage('room' + data) ?? [];
+  setData(Arr);   
+  setRoomSelected(true);
 }
+
+
 
  
 return (
-    <div>
-    <div  className="ChatSection">
-      <div className="chat">
-        {mensajes.map((e, i) => (
-          <div key={i}>
-            <div>{e.nombre}: {e.mensaje}</div>
-          </div>
-        ))}
-      </div>
-      <form onSubmit={submit} className="messageBox" >
-        <textarea
-          name=""
-          id=""
-          cols="60"
-          rows="1"
-          value={mensaje}
-          onChange={(e) => setMensaje(e.target.value)}
-        ></textarea>
-        <button className="sendButton">Enviar</button>
-      </form>
-      </div>
-    </div>
+    <div className='App'>
+     
+      <SideMenu joinRoom={joinRoom} nombre = {nombre}/>
+      {roomSelected ? (
+                    <Conversation nombre={nombre} mensaje={mensaje} setMensaje = {setMensaje} room={room} socket = {socket} data = {data} />
+                ): (
+                    <h3 className='userSelect'>Seleccione algun usuario para chatear</h3>
+                )}
+      
+</div>
   );
 };
 

@@ -1,22 +1,45 @@
-const express = require('express');
-const http = require('http');
+const express = require("express");
+const http = require("http");
 const app = express();
 const server = http.createServer(app);
+const cors = require("cors");
+app.use(cors());
 
-const socketio = require('socket.io');
-const io = socketio(server);
+const { Server } = require("socket.io");
+const io = new Server(server, 
+  {
+   cors: 
+   {
+     origin:"http://localhost:3000",
+     methods: ["GET", "POST"],
+   } ,
+  })
 
 io.on('connection', socket => 
 {
 
-    socket.on('conectado', () => 
+
+        socket.on('conectado', (data) => 
         {
             console.log('Usuario conectado');
         });
-    
-        socket.on('mensaje', (nombre, mensaje) => {
-            io.emit("mensajes", { nombre, mensaje });
-          });
+        socket.on("join_room", (data) => 
+        {
+          socket.join(data);
+        })
+
+        socket.on('send_message', (object) => {
+            socket.to(object.room).emit("receive_messages", object);
+            console.log(object);
           });
 
-server.listen(3000, () => console.log("Servidor inicializado"));
+        socket.on("disconnect", () => {
+            socket.emit("mensajes", {
+              server: "Server",
+
+            });
+          });
+        });
+
+
+server.listen(3001, () => console.log("Servidor inicializado"));

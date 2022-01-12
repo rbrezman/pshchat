@@ -1,9 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
-import Socket from './components/Socket';
 import Chat from './components/Chat';
 import SideMenu from './components/SideMenu';
-import Contacts from './components/contacts/Contacts';
+import { clearLocalStorage } from './Storage';
+
+
+
 
 
 
@@ -11,6 +13,11 @@ function App() {
 
   const [nombre, setNombre] = useState("");
   const [registrado, setRegistrado] = useState(false);
+
+  useEffect(() => 
+  {
+      clearLocalStorage();
+  })
   
 const registrar = (e) => 
 {
@@ -27,19 +34,23 @@ const registrar = (e) =>
        
       {
         !registrado &&
-        <form className="login" onSubmit={registrar}>
-          <header>¡Bienvenido al chat de PSH!</header>
-          <div>
-          <label htmlFor="">Ingrese su nombre</label>
-          </div>
-          <input value={nombre} onChange={e => setNombre(e.target.value)}></input>
-          <button>Chatear</button>
-        </form>
+        <div className="form-container">
+          <form className="login" onSubmit={registrar}>
+            <img className="login-logo" src="https://i.ibb.co/TtKPBqG/71151958-8306-42f2-95ce-9d339e9d6d7d.jpg"></img>
+            <header className="login-title">¡Bienvenido al chat de PSH!</header>
+            <div>
+              <input className="login-input" value={nombre} onChange={e => setNombre(e.target.value)} placeholder="Ingrese su nombre"></input>
+              <button className="login-button">Chatear</button>
+            </div>
+          </form>
+          
+        </div>
        
       }
 
       {
-          registrado && <Chat nombre = {nombre}/> 
+         registrado &&
+         <Chat nombre = {nombre} />
         
       }
  
