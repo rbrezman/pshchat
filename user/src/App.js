@@ -6,9 +6,6 @@ import { clearLocalStorage } from './Storage';
 
 
 
-
-
-
 function App() {
 
   const [nombre, setNombre] = useState("");

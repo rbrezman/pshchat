@@ -17,9 +17,7 @@ const [roomSelected, setRoomSelected] = useState(false);
 
 
 useEffect(() => {
-    console.log("Hola")
     socket.emit('conectado', nombre);
-    console.log("Chau")
 }, [nombre]);
 
 

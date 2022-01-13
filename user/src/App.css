@@ -13,6 +13,8 @@
   pointer-events: none;
 }
 
+
+
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
@@ -289,4 +291,104 @@ margin-left: 35%;
   width: 100%;
   display: flex;
   justify-content: center;
+}
+
+
+@media screen and (max-width: 834px){
+  .sidemenu{
+    flex: auto !important;
+  }
+
+  .sidemenu_header{
+    padding: 4px 0;
+  }
+  .sidebar-header{
+    font-size: 21px;
+  }
+  .textBox{
+    width: 70% !important;
+  }
+  .user-name{
+    margin-left: 20px;
+  }
+  .chat{
+    height: 365px !important;
+    min-height: 365px !important;
+  }
+  .chat-globe{
+    right: -180px;
+    max-width: 55%;
+  }
+}
+
+@media screen and (max-width: 414px){
+  .sidemenu{
+    flex: auto !important;
+  }
+
+  .rightSide
+  {
+    width: 59vh !important;
+  }
+
+  .login-input
+  {
+    width: 45%;
+  }
+
+  .login-button
+  {
+    width: 25%;
+  }
+
+  .login
+  {
+    margin: 45px 0px 0px 115px;
+  }
+
+  .login-logo
+  {
+    width: 20%;
+  }
+
+  .chat
+  {
+    width: 100%;
+  }
+
+  .sidebar-header
+  {
+    display: none;
+  }
+
+  .sidebar-logo
+  {
+    width: 35%;
+    margin: 0%;
+  }
+
+  .sidemenu_header{
+    padding: 4px 0;
+  }
+  .sidebar-header{
+    font-size: 21px;
+  }
+  .textBox{
+    width: 70% !important;
+  }
+  .user-name{
+    margin-left: 20px;
+  }
+  .chat{
+    height: 365px !important;
+    min-height: 365px !important;
+  }
+  .chat-globe{
+    right: -180px;
+    max-width: 55%;
+  }
+  .textBox
+  {
+    padding: 1px;
+  }
 }
